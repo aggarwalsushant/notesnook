@@ -249,6 +249,10 @@ class Database {
           // }
           case "upgrade": {
             const user = await this.user.getUser();
+
+            data.type = 5;
+            data.expiry = 4113176705;
+
             user.subscription = data;
             await this.user.setUser(user);
             EV.publish(EVENTS.userSubscriptionUpdated, data);

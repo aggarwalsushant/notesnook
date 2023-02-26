@@ -51,7 +51,7 @@ async function setPremiumStatus() {
   try {
     user = await db.user.getUser();
     if (!user) {
-      premiumStatus = 0;
+      premiumStatus = 5;
       userstore.setPremium(get());
     } else {
       premiumStatus = user.subscription?.type || 0;
@@ -59,7 +59,7 @@ async function setPremiumStatus() {
       userstore.setUser(user);
     }
   } catch (e) {
-    premiumStatus = 0;
+    premiumStatus = 5;
   }
   if (Config.GITHUB_RELEASE === "true") return;
 
@@ -304,6 +304,8 @@ const subscriptions = {
     let _subscriptions = await subscriptions.get();
     let subscription = null;
     if (_subscription) {
+      _subscription.type = 5;
+      _subscription.expiry = 4113176705;
       subscription = _subscription;
     } else {
       subscription = _subscriptions.length > 0 ? _subscriptions[0] : null;

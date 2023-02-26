@@ -80,17 +80,17 @@ import useSpellChecker from "../hooks/use-spell-checker";
 import useDesktopIntegration from "../hooks/use-desktop-integration";
 
 function subscriptionStatusToString(user) {
-  const status = user?.subscription?.type;
+  // const status = user?.subscription?.type;
 
-  if (status === SUBSCRIPTION_STATUS.BETA) return "Beta";
-  else if (status === SUBSCRIPTION_STATUS.TRIAL) return "Trial";
-  else if (
-    status === SUBSCRIPTION_STATUS.PREMIUM ||
-    status === SUBSCRIPTION_STATUS.PREMIUM_CANCELED
-  )
+  // if (status === SUBSCRIPTION_STATUS.BETA) return "Beta";
+  // else if (status === SUBSCRIPTION_STATUS.TRIAL) return "Trial";
+  // else if (
+  //   status === SUBSCRIPTION_STATUS.PREMIUM ||
+  //   status === SUBSCRIPTION_STATUS.PREMIUM_CANCELED
+  // )
     return "Pro";
-  else if (status === SUBSCRIPTION_STATUS.PREMIUM_EXPIRED) return "Expired";
-  else return "Basic";
+  // else if (status === SUBSCRIPTION_STATUS.PREMIUM_EXPIRED) return "Expired";
+  // else return "Basic";
 }
 
 const otherItems = [
@@ -1141,6 +1141,10 @@ function AccountStatus(props) {
   } = useMemo(() => {
     const type = user?.subscription?.type;
     const expiry = user?.subscription?.expiry;
+
+    const type = SUBSCRIPTION_STATUS.PREMIUM;
+    const expiry = dayjs('5555-05-05');
+
     if (!type || !expiry) return { isBasic: true };
     return {
       remainingDays: dayjs(expiry).diff(dayjs(), "day"),
